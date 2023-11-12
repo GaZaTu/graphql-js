@@ -1,6 +1,6 @@
 {
   "name": "@gazatu/graphql",
-  "version": "16.8.1.1",
+  "version": "16.8.1",
   "description": "A Query Language and Runtime which can target any service.",
   "license": "MIT",
   "private": false,
