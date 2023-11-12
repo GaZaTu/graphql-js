@@ -1,4 +1,3 @@
-import { didYouMean } from '../jsutils/didYouMean';
 import { inspect } from '../jsutils/inspect';
 import { invariant } from '../jsutils/invariant';
 import { isIterableObject } from '../jsutils/isIterableObject';
@@ -6,7 +5,6 @@ import { isObjectLike } from '../jsutils/isObjectLike';
 import type { Path } from '../jsutils/Path';
 import { addPath, pathToArray } from '../jsutils/Path';
 import { printPathArray } from '../jsutils/printPathArray';
-import { suggestionList } from '../jsutils/suggestionList';
 
 import { GraphQLError } from '../error/GraphQLError';
 
@@ -125,23 +123,6 @@ function coerceInputValueImpl(
       );
     }
 
-    // Ensure every provided field is defined.
-    for (const fieldName of Object.keys(inputValue)) {
-      if (!fieldDefs[fieldName]) {
-        const suggestions = suggestionList(
-          fieldName,
-          Object.keys(type.getFields()),
-        );
-        onError(
-          pathToArray(path),
-          inputValue,
-          new GraphQLError(
-            `Field "${fieldName}" is not defined by type "${type.name}".` +
-              didYouMean(suggestions),
-          ),
-        );
-      }
-    }
     return coercedValue;
   }
 
